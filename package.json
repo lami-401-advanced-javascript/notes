@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,11 @@
   },
   "homepage": "https://github.com/lami-401-advanced-javascript/notes#readme",
   "dependencies": {
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "save-dev": "0.0.1-security",
+    "test": "^0.6.0"
+  },
+  "devDependencies": {
+    "jest": "^26.5.3"
   }
 }
