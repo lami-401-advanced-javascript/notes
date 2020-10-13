@@ -1,13 +1,20 @@
 'use strict';
 
 /// require input and notes files and utilize their functions ///
-const input = require("./lib/input.js");
-const notes = require("./lib/notes.js");
+const Input = require("./lib/input.js");
+const Notes = require("./lib/notes.js");
 
 
 /// show'em what you're made of///
 /// call the methods and write something down ///
 
-console.log(input.prototype.adding());
+const verify = new Input(process.argv[2], process.argv[3]);
+const results = verify.isValid(process.argv[2], process.argv[3]);
 
-console.log(notes.prototype.execute());
+if(results !== "That is incorrect"){
+  const console = new Notes(process.argv[2], process.argv[3]);
+  console.execute(process.argv[2], process.argv[3]);
+}
+else{
+  console.log(`${verify.action} is not a command`);
+}
