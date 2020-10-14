@@ -1,17 +1,11 @@
 
-const {expect} = require("@jest/globals");
 const Input = require("../lib/input");
-const minimi = require('minimist');
 
-describe("Testing input nonsense", () => {
-    it("should give me a new instance ", () => {
-    const verify = new Input(minimi[2], minimi[3]);
-    const results = verify.isValid(minimi[2], minimi[3]);
+test('Ensures Input is Valid', () => {
+    const input = new Input('--add', 'blah');
+    const input2 = new Input('--bad', 'blah');
     
-
-    expect(results).not.toBe(null);
-    expect(results).toBeTruthy();
-    expect("").toBeFalsy();
-
-    })
-})
+    expect(input.isValid(input.action)).toBeTruthy();
+    expect(input).toEqual({action: '--add', payload: 'blah'});
+    expect(input2.isValid(input2.action)).toBeFalsy();
+});
