@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/lami-401-advanced-javascript/notes#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "minimist": "^1.2.5",
+    "mongoose": "^5.10.9",
     "save-dev": "0.0.1-security",
     "test": "^0.6.0"
   },
