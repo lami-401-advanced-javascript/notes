@@ -5,15 +5,30 @@ const Input = require("./lib/input.js");
 const Notes = require("./lib/notes.js");
 
 
-/// show'em what you're made of///
-/// call the methods and write something down ///
 
-const input = new Input(process.argv[2], process.argv[3]);
+//files we will be using 
+const mongoose = require('mongoose');
+// const NotesDB = require('./models/notes-schema.js');
 
-if(input.action){
-  const notes = new Notes(process.argv[2], process.argv[3]);
-  notes.execute(process.argv[2], process.argv[3]);
-}
-else{
-  console.log(`${process.argv[2]} is not a command`);
-}
+
+///Connect to mongoose
+const MONGOOSE_URI = 'mongodb://localhost:27017';
+mongoose.connect(MONGOOSE_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+  const input = new Input();
+  const notes = new Notes();
+  
+  if (new Input()) {
+      notes.execute(input.command)
+      .then(mongoose.disconnect)
+      .catch(error => console.error(error))
+  } else {
+      console.log("Ugh...")
+  }
+
+})
+
+
+
