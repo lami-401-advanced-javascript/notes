@@ -1,34 +1,29 @@
 'use strict';
 
 /// require input and notes files and utilize their functions ///
+require("dotenv").config();
 const Input = require("./lib/input.js");
-const Notes = require("./lib/notes.js");
+const mongoose = require("mongoose");
+const Note = require("./lib/notes.js");
 
+const input = new Input(process.argv)
+console.log(input);
 
-
-//files we will be using 
-const mongoose = require('mongoose');
-// const NotesDB = require('./models/notes-schema.js');
-
-
-///Connect to mongoose
-const MONGOOSE_URI = 'mongodb://localhost:27017';
-mongoose.connect(MONGOOSE_URI, {
+if(input.action){
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-  const input = new Input();
-  const notes = new Notes();
-  
-  if (new Input()) {
-      notes.execute(input.command)
-      .then(mongoose.disconnect)
-      .catch(error => console.error(error))
-  } else {
-      console.log("Ugh...")
-  }
+  console.log("connected");
+  const notes = new Note(input);
+  notes.execute(process.argv[2], process.argv[3]).then(result => console.log(result))
 
-})
+});
+}else{
+  console.log(`${process.argv[2]} is not a command`)
+}
+  
+
 
 
 
